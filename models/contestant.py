@@ -17,8 +17,16 @@ class Contestant:
         self.__origin = origin
         self.__Biography = Biography
         self.__DOB = DOB
+# A function print_summary that prints a summarized version of contestant information
+    def print_summary(self):
+        # Define the border string
+        border = " —" + "-" * (len(self.__name) + 18) + "— "
 
-    # TODO: @Mahamat define a function print_summary that prints a summarized version of contestant information
+        #print the contestant summary
+        
+        print(border)
+        
+
     # —----------------------------
     #|          Contestant 1      |
     #|     Name: Tinubu           |
