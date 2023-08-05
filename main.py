@@ -19,3 +19,24 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#Mugisha's task: Register contestant function
+# Function to register a contestant
+def register_contestant():
+    print("\nEnter contestant details:")
+    name = input("Name: ")
+    origin = input("Place of origin: ")
+    dob = input("D.O.B: ")
+    link = input("Bio link (optional): ")
+    description = input("Write a short description: ")
+
+    contestant = {
+        "name": name,
+        "origin": origin,
+        "dob": dob,
+        "link": link,
+        "description": description
+    }
+
+    contestants.append(contestant)
+    print("Contestant registered!")
