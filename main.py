@@ -15,6 +15,18 @@ def main():
     # Please pick an option
     # 1). View contestants   2). Register contestant   3). Start voting session
 
+    print("Welcome to our system. \nPress the following numbers that corresponds to with your choice.")
+    choice = input("Press '1' to view contestants \nPress '2' to register contestants \nPress '3' to start a session ")
+    if choice == 1:
+        view_contestant()
+    elif choice == 2:
+        register_contestant()
+    elif choice == 3:
+        start_session()
+    else :
+        print("Wrong input. Try again!")
+        pass
+
     pass
 
 if __name__ == "__main__":
