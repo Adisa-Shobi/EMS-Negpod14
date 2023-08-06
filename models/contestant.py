@@ -28,6 +28,10 @@ class Contestant:
         print("|" + f"         {self.__name}" + "           |")
         print("|" + "                      " + "           |")
         print("|" + f" Name: {self.__name}" + "           |")
+        print("|" + f" Origin: {self.__origin}" + "         |")
+        print("|" + f" Bio: {self.__Biography}" + "         |")
+        print("|" + f" DOB: {self.__DOB}" + "     |")
+        print(border)
 
 
     # —----------------------------
