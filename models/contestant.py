@@ -25,7 +25,10 @@ class Contestant:
         #print the contestant summary
         
         print(border)
-        
+        print("|" + f"         {self.__name}" + "           |")
+        print("|" + "                      " + "           |")
+        print("|" + f" Name: {self.__name}" + "           |")
+
 
     # —----------------------------
     #|          Contestant 1      |
