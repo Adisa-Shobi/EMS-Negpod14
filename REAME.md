@@ -1,1 +1,0 @@
-This project aims to modernise and improve the electoral process by removing human involvement and ensuring transparency. It will build trust in the decision-making results using an advanced electoral management tool.
