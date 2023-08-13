@@ -31,6 +31,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+#Kuir's task: veiwing contestansts function
+def view_contestants():
+    options = int(input('select your option: '))
+view_contestants = 1
+register_contestants = 2
+start_voting_session = 3
+if options == 1:
+    print('view_contestants')
+
+else:
+    print('try again')
+
+
 
 #Mugisha's task: Register contestant function
 # Function to register a contestant
