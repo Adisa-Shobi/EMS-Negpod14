@@ -4,6 +4,7 @@ Program entry point
 """
 from mailbox import Message
 import os
+import time
 from models.contestant import Contestant
 from constants import welcome_message
 
@@ -22,9 +23,9 @@ def main():
     # 1). View contestants   2). Register contestant   3). Start voting session
     running = True
     while running:
+        os.system('clear')
         print(welcome_message)
         print("Press the following numbers that corresponds to with your choice.")
-        os.system('clear')
         choice = input(
             "\
             Press '1' to view contestants \n\
@@ -32,7 +33,7 @@ def main():
             Press '3' to start a session\n\
             Press '4' to quit.\n")
         if choice == "1":
-            view_contestant()
+            view_contestants()
         elif choice == "2":
             register_contestant()
         elif choice == "3":
@@ -47,13 +48,48 @@ def main():
 
         pass
 
+def is_contestants():
+    '''
+    Checks if contestants have been registered
+    '''
+    if len(contestants) == 0:
+        print("No contestants added")
+        print("Please register contestant to continue")
+        time.sleep(1)
+        return False
+    return True
+
 def start_session():
     '''
     Starts voting session based on currently added contestants
     '''
     os.system('clear')
+    if not is_contestants():
+        return
+    duration = input("Please enter voting session duration(mins): ")
+    COUNTDOWN = 5
+    while COUNTDOWN > 0:
+        os.system('clear')
+        print(f"Session starts in {COUNTDOWN}")
+        time.sleep(1)
+        COUNTDOWN -= 1
+    init_session()
 
+def init_session():
+    '''
+    App flow for voting session
+    '''
+    # TODO: @Jules you can implement this part
 
+#Kuir's task: veiwing contestansts function
+def view_contestants():
+    if len(contestants) == 0:
+        print("No contestants added")
+        time.sleep(1)
+    else:
+        for contestant in contestants:
+            contestant.print_summary()
+    time.sleep(1000)
 
 #Mugisha's task: Register contestant function
 # Function to register a contestant

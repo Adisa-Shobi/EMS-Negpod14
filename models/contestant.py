@@ -25,15 +25,22 @@ class Contestant:
         # A function print_summary that prints a summarized version of contestant information
     def print_summary(self):
         # Define the border string
-        border = " —" + "-" * (len(self.__name) + 18) + "— "
+        LENGTH = len(self.__name) + 30
+        border = " —" + "-" * (len(self.__name) + 28) + "— "
 
         #print the contestant summary
         
         print(border)
-        print("|" + f"  {self.__name}" + "           |")
-        print("|" + "                " + "           |")
-        print("|" + f" Name: {self.__name}" + "      |")
-        print("|" + f" Origin: {self.__origin}" + "  |")
-        print("|" + f" Bio: {self.__Biography}" + "  |")
-        print("|" + f" DOB: {self.__DOB}" + "        |")
+        print("|" + self.__name + (LENGTH - len(self.__name)) * " " +"|")
+        print("|"  + LENGTH * " " + "|")
+        line = f" Name: {self.__name}"
+        print("|" + line + (LENGTH - len(line)) * " " +"|")
+        line = f" Origin: {self.__origin}"
+        print("|" + line + (LENGTH - len(line)) * " " +"|")
+        line = f" Desription: {self.__description}"
+        print("|" + line + (LENGTH - len(line)) * " " +"|")
+        line = f" Link: {self.__link}"
+        print("|" + line + (LENGTH - len(line)) * " " +"|")
+        line = f" DOB: {self.__DOB}"
+        print("|" + line + (LENGTH - len(line)) * " " +"|")
         print(border)
