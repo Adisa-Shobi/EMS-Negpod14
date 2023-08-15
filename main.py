@@ -5,8 +5,14 @@ Program entry point
 from mailbox import Message
 import os
 import time
+from datetime import datetime
 from models.contestant import Contestant
-from constants import welcome_message
+from models.votes import Vote
+from models.session import Session
+from utils import welcome_message
+import utils
+import time
+import os
 
 
 # TODO: @Kuir Define a function view_contestants that handle when the user picks option 1
@@ -31,9 +37,9 @@ def main():
             Press '1' to view contestants \n\
             Press '2' to register contestants \n\
             Press '3' to start a session\n\
-            Press '4' to quit.\n")
+            Press '4' to quit.\nPlease select a choice: ")
         if choice == "1":
-            view_contestants()
+            view_contestants(10)
         elif choice == "2":
             register_contestant()
         elif choice == "3":
@@ -55,7 +61,7 @@ def is_contestants():
     if len(contestants) == 0:
         print("No contestants added")
         print("Please register contestant to continue")
-        time.sleep(1)
+        time.sleep(3)
         return False
     return True
 
@@ -67,29 +73,35 @@ def start_session():
     if not is_contestants():
         return
     duration = input("Please enter voting session duration(mins): ")
+    try:
+        duration = int(duration)
+    except Exception as e:
+        print("Duration must be in an interger")
+        return
+    if duration < 1 or duration > 20:
+        print("Duration must be greater than 0 and less than 20")
+        return
     COUNTDOWN = 5
     while COUNTDOWN > 0:
         os.system('clear')
         print(f"Session starts in {COUNTDOWN}")
         time.sleep(1)
         COUNTDOWN -= 1
-    init_session()
+    session = init_session(duration)
+    session.print_summary(contestants)
+    input("Press any key to exit: ")
 
-def init_session():
-    '''
-    App flow for voting session
-    '''
+def init_session(duration):
     # TODO: @Jules you can implement this part
 
 #Kuir's task: veiwing contestansts function
-def view_contestants():
-    if len(contestants) == 0:
-        print("No contestants added")
-        time.sleep(1)
+def view_contestants(sleep_time):
+    if not is_contestants():
+        return
     else:
         for contestant in contestants:
             contestant.print_summary()
-    time.sleep(1000)
+    time.sleep(sleep_time)
 
 #Mugisha's task: Register contestant function
 # Function to register a contestant
@@ -106,6 +118,7 @@ def register_contestant():
 
     contestants.append(contestant)
     print("Contestant registered!")
+    time.sleep(2)
 
 if __name__ == "__main__":
     main()
