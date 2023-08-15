@@ -92,7 +92,63 @@ def start_session():
     input("Press any key to exit: ")
 
 def init_session(duration):
-    # TODO: @Jules you can implement this part
+    '''
+    App flow for voting session
+    '''
+    start_time = datetime.now()
+    ticker = time.time()
+    session = Session(duration=duration, start_time=start_time)
+    while True:
+        curr_time = time.time()
+        elapsed_time = curr_time - ticker
+        time_left = ((duration * 60) - elapsed_time) // 60
+
+        if elapsed_time >= (duration * 60):
+            os.system("clear")
+            utils.print_boxed_text_with_spacing("Time Up. Session Expired")
+            time.sleep(2)
+            break;
+        os.system('clear')
+        print(utils.session_summary)
+        print(f"Session Start: {start_time} || Session duration: {duration} || Time Left(approx): {time_left}mins(s)")
+        print(utils.session_summary_end)
+        view_contestants(0)
+        name = input("Please enter your name as shown on your government issued ID: ")
+        age = input("Please enter your age: ")
+        voters_id = input("Please enter you National Identification Number: ")
+        vote = input("Please enter contestant number to cast vote: ")
+        try:
+            vote = int(vote)
+        except Exception as e:
+            print("Vote must be an integer")
+        try:
+            age = int(age)
+        except Exception as e:
+            print("Age must be an integer")
+        selected_contestant = ''
+        for contestant in contestants:
+            if contestant.id == vote:
+                selected_contestant = contestant
+        if not selected_contestant:
+            print("Selected contestant not found.\nPlease try again")
+            time.sleep(3)
+            continue
+        confirmation = input(f"\033[91mAre you sure you want to vote {selected_contestant.name} (y/n)\033[0m ")
+        confirmation = confirmation.lower().strip()
+        print(confirmation)
+        if confirmation != "y":
+            continue
+        vote = Vote(name=name, age=age, voted_for=vote, voters_id=voters_id)
+        session.add_vote(vote)
+        selected_contestant.add_vote()
+        utils.print_boxed_text_with_spacing("Vote successful. Congratulation!")
+        is_continue = input("Enter session pin to end session(****): ")
+        is_continue = is_continue.lower().strip()
+        if is_continue == os.environ.get("SESSION_PIN"):
+            utils.print_boxed_text_with_spacing("Voting Session Ended")
+            time.sleep(1.5)
+            break
+    return session
 
 #Kuir's task: veiwing contestansts function
 def view_contestants(sleep_time):
